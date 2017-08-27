@@ -13,14 +13,6 @@
 
 		IEnumerator Start () 
 		{
-			Vector3 savedLocalPosition = Vector3.zero;
-			Quaternion savedLocalRotation = Quaternion.identity;
-			if (saveLocalTransform)
-			{
-				savedLocalPosition = transform.localPosition;
-				savedLocalRotation = transform.localRotation;
-			}
-
 			attachedComponents = GetComponents (typeof(MonoBehaviour)) as MonoBehaviour[];
 			ToggleOtherComponents (false);
 
@@ -37,9 +29,7 @@
 				yield return new WaitForEndOfFrame ();
 			}
 
-			transform.parent = VRTK_DeviceFinder.HeadsetTransform ();
-			transform.localPosition = savedLocalPosition;
-			transform.localRotation = savedLocalRotation;
+			transform.SetParent (VRTK_DeviceFinder.HeadsetTransform (), !saveLocalTransform);
 			ToggleOtherComponents (true);
 		}
 
