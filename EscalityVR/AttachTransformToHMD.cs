@@ -34,8 +34,6 @@
 					Debug.LogWarning ("Timeout: VRTK_DeviceFinder could not find HeadsetTransform, fail to attach " + gameObject.name + " to HMD.");
 					yield break;
 				}
-
-				Debug.LogWarning (VRTK_DeviceFinder.HeadsetTransform ());
 				yield return new WaitForEndOfFrame ();
 			}
 
