@@ -15,24 +15,52 @@ public class ProjectAndSceneCreationTools : MonoBehaviour
 			"Lights",
 			"UI",
 			"World",
+			"World/Structures",
+			"World/Props",
 			"Gameplay",
+			"Gameplay/Items",
 			"_Dynamic"
 		};
+		int nestedItemsNum = 0;
 		for (int i = 0; i < BasicSceneStructure.Length; i++)
-			TryInstantiate (BasicSceneStructure [i], i);
+		{
+			string GOname = BasicSceneStructure [i];
+			if (GOname.Contains("/"))
+			{
+				nestedItemsNum++;
+				int slashIndex = GOname.IndexOf ("/");
+				TryInstantiate (GOname.Substring (slashIndex + 1, GOname.Length - (slashIndex + 1)), 0, GOname.Substring (0, slashIndex));
+			}
+			else
+				TryInstantiate (GOname, i - nestedItemsNum);
+		}
 	}
 
-	static void TryInstantiate(string newGO, int siblingIndex)
+	static void TryInstantiate(string newGO, int siblingIndex, string parentGO = null)
 	{
 		Scene scene = SceneManager.GetActiveScene();
 		var existingGOs = new List<GameObject>();
 		scene.GetRootGameObjects(existingGOs);
 
+		GameObject existingParentGO = null;
 		foreach (GameObject GO in existingGOs)
+		{
+			if (parentGO != null && GO.name == parentGO)
+			{
+				existingParentGO = GO;
+				if (existingParentGO.transform.Find (newGO) != null)
+					return;
+			}
 			if (GO.name == newGO)
 				return;
-
+		}
+		if (GameObject.Find ("newGO") != null)
+			return;
+		 
 		GameObject createdGO = new GameObject (newGO);
-		createdGO.transform.SetSiblingIndex (siblingIndex);
+		if (existingParentGO != null)
+			createdGO.transform.parent = existingParentGO.transform;
+		else
+			createdGO.transform.SetSiblingIndex (siblingIndex);
 	}
 }
