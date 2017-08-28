@@ -1,31 +1,33 @@
-﻿using System;
-using UnityEngine;
-
-public class GenericSingletonClass<T> : MonoBehaviour where T : Component
+﻿namespace Generics
 {
-	private static T instance;
-	public static T Instance {
-		get {
-			if (instance == null) {
-				instance = FindObjectOfType<T> ();
-				if (instance == null) {
-					GameObject obj = new GameObject ();
-					obj.name = typeof(T).Name;
-					instance = obj.AddComponent<T>();
-				}
-			}
-			return instance;
-		}
-	}
+	using System;
+	using UnityEngine;
 
-	public virtual void Awake ()
+	public class GenericSingletonClass<T> : MonoBehaviour where T : Component
 	{
-		if (instance == null) {
-			instance = this as T;
-			DontDestroyOnLoad (this.gameObject);
-		} else {
-			Destroy (gameObject);
+		private static T _instance;
+		public static T instance {
+			get {
+				if (_instance == null) {
+					_instance = FindObjectOfType<T> ();
+					if (_instance == null) {
+						GameObject obj = new GameObject ();
+						obj.name = typeof(T).Name;
+						_instance = obj.AddComponent<T>();
+					}
+				}
+				return _instance;
+			}
+		}
+
+		public virtual void Awake ()
+		{
+			if (_instance == null) {
+				_instance = this as T;
+				//DontDestroyOnLoad (this.gameObject);
+			} else {
+				Destroy (gameObject);
+			}
 		}
 	}
 }
-
