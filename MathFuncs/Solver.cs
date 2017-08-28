@@ -8,7 +8,8 @@
 		{
 			float[] roots = new float[2];
 
-			float determinant = Mathf.Pow (b, 2) - 4 * a * c;
+			float determinant = Mathf.Pow (b, 2) - 4f * a * c;
+
 			if (determinant < 0)
 			{
 				roots [0] = roots [1] = float.NaN;
