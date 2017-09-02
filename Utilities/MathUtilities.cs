@@ -1,8 +1,8 @@
-﻿namespace MathFuncs
+﻿namespace Utilities
 {
 	using UnityEngine;
 
-	public class Solver
+	public class MathUtilities
 	{
 		public static float[] QuadraticFormula(float a, float b, float c)
 		{
