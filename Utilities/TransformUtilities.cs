@@ -1,4 +1,4 @@
-﻿namespace TransformUtilities
+﻿namespace Utilities
 {
 	using UnityEngine;
 
