@@ -1,66 +1,69 @@
-﻿using UnityEditor;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.Collections.Generic;
-
-public class ProjectAndSceneCreationTools : MonoBehaviour
+﻿namespace EditorExtension
 {
-	[MenuItem("Custom Tools/ProjectAndSceneCreationTools/CreateSceneStructure")]
-	static void CreateSceneStructure()
+	using UnityEditor;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+	using System.Collections.Generic;
+
+	public class ProjectAndSceneCreationTools : MonoBehaviour
 	{
-		string[] BasicSceneStructure = {
-			"Debug",
-			"Managers",
-			"Cameras",
-			"Lights",
-			"UI",
-			"World",
-			"World/Structures",
-			"World/Props",
-			"Gameplay",
-			"Gameplay/Items",
-			"_Dynamic"
-		};
-		int nestedItemsNum = 0;
-		for (int i = 0; i < BasicSceneStructure.Length; i++)
+		[MenuItem("Custom Tools/ProjectAndSceneCreationTools/CreateSceneStructure")]
+		static void CreateSceneStructure()
 		{
-			string GOname = BasicSceneStructure [i];
-			if (GOname.Contains("/"))
+			string[] BasicSceneStructure = {
+				"Debug",
+				"Managers",
+				"Cameras",
+				"Lights",
+				"UI",
+				"World",
+				"World/Structures",
+				"World/Props",
+				"Gameplay",
+				"Gameplay/Items",
+				"_Dynamic"
+			};
+			int nestedItemsNum = 0;
+			for (int i = 0; i < BasicSceneStructure.Length; i++)
 			{
-				nestedItemsNum++;
-				int slashIndex = GOname.IndexOf ("/");
-				TryInstantiate (GOname.Substring (slashIndex + 1, GOname.Length - (slashIndex + 1)), 0, GOname.Substring (0, slashIndex));
+				string GOname = BasicSceneStructure [i];
+				if (GOname.Contains("/"))
+				{
+					nestedItemsNum++;
+					int slashIndex = GOname.IndexOf ("/");
+					TryInstantiate (GOname.Substring (slashIndex + 1, GOname.Length - (slashIndex + 1)), 0, GOname.Substring (0, slashIndex));
+				}
+				else
+					TryInstantiate (GOname, i - nestedItemsNum);
 			}
-			else
-				TryInstantiate (GOname, i - nestedItemsNum);
 		}
-	}
 
-	static void TryInstantiate(string newGO, int siblingIndex, string parentGO = null)
-	{
-		Scene scene = SceneManager.GetActiveScene();
-		var existingGOs = new List<GameObject>();
-		scene.GetRootGameObjects(existingGOs);
-
-		GameObject existingParentGO = null;
-		foreach (GameObject GO in existingGOs)
+		static void TryInstantiate(string newGO, int siblingIndex, string parentGO = null)
 		{
-			if (parentGO != null && GO.name == parentGO)
+			Scene scene = SceneManager.GetActiveScene();
+			var existingGOs = new List<GameObject>();
+			scene.GetRootGameObjects(existingGOs);
+
+			GameObject existingParentGO = null;
+			foreach (GameObject GO in existingGOs)
 			{
-				existingParentGO = GO;
-				if (existingParentGO.transform.Find (newGO) != null)
+				if (parentGO != null && GO.name == parentGO)
+				{
+					existingParentGO = GO;
+					if (existingParentGO.transform.Find (newGO) != null)
+						return;
+				}
+				if (GO.name == newGO)
 					return;
 			}
-			if (GO.name == newGO)
+			if (GameObject.Find ("newGO") != null)
 				return;
+			 
+			GameObject createdGO = new GameObject (newGO);
+			if (existingParentGO != null)
+				createdGO.transform.parent = existingParentGO.transform;
+			else
+				createdGO.transform.SetSiblingIndex (siblingIndex);
 		}
-		if (GameObject.Find ("newGO") != null)
-			return;
-		 
-		GameObject createdGO = new GameObject (newGO);
-		if (existingParentGO != null)
-			createdGO.transform.parent = existingParentGO.transform;
-		else
-			createdGO.transform.SetSiblingIndex (siblingIndex);
 	}
 }

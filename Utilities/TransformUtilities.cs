@@ -1,6 +1,7 @@
 ﻿namespace Utilities
 {
 	using UnityEngine;
+	using System.Collections.Generic;
 
 	public static class TransformUtilities
 	{
@@ -23,6 +24,25 @@
 					return result;
 			}
 			return null;
+		}
+
+		public static List<GameObject> FindObjectsWithTag(this Transform parent, string tag)
+		{
+			List<GameObject> taggedGameObjects = new List<GameObject>();
+
+			for (int i = 0; i < parent.childCount; i++)
+			{
+				Transform child = parent.GetChild(i);
+				if (child.tag == tag)
+				{
+					taggedGameObjects.Add(child.gameObject);
+				}
+				if (child.childCount > 0)
+				{
+					taggedGameObjects.AddRange(FindObjectsWithTag(child, tag));
+				}
+			}
+			return taggedGameObjects;
 		}
 	}
 }
