@@ -6,7 +6,7 @@
 
 	public class DynamicContainer : GenericSingletonClass<DynamicContainer> 
 	{
-		public override void Awake ()
+		protected override void Awake ()
 		{
 			base.Awake ();
 			gameObject.name = "_Dynamic";

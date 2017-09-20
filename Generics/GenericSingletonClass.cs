@@ -25,7 +25,7 @@
 
 		private static bool applicationIsQuitting = false;
 
-		public virtual void Awake ()
+		protected virtual void Awake ()
 		{
 			if (_instance == null || gameObject == this.gameObject) 
 			{
