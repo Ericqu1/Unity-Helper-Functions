@@ -33,6 +33,7 @@
 				//DontDestroyOnLoad (this.gameObject);
 			} else 
 			{
+				Debug.LogWarning("A new singleton of " + _instance.name + " is trying to be made while one already exists. The new object " + gameObject.name + " has been destroyed.");
 				Destroy (gameObject);
 			}
 		}
