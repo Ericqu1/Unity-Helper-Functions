@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 
-	public class MathUtilities
+	public static class MathUtilities
 	{
 		public static float[] QuadraticFormula(float a, float b, float c)
 		{
