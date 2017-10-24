@@ -1,4 +1,4 @@
-﻿namespace EscalityVR
+﻿namespace VRTKUtilities
 {
 	using System.Collections;
 	using UnityEngine;
