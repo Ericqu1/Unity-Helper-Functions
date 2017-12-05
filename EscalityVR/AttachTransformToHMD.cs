@@ -1,4 +1,4 @@
-﻿namespace VRTKUtilities
+﻿namespace VRTK.Utilities
 {
 	using System.Collections;
 	using UnityEngine;
@@ -7,7 +7,7 @@
 	public class AttachTransformToHMD : MonoBehaviour 
 	{
 		[SerializeField]
-		private bool saveLocalTransform;
+		private bool saveLocalTransform = false;
 
 		private MonoBehaviour[] attachedComponents;
 

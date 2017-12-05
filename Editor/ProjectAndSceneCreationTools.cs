@@ -20,8 +20,7 @@
 				"World/Structures",
 				"World/Props",
 				"Gameplay",
-				"Gameplay/Items",
-				"_Dynamic"
+				"Gameplay/Items"
 			};
 			int nestedItemsNum = 0;
 			for (int i = 0; i < BasicSceneStructure.Length; i++)
