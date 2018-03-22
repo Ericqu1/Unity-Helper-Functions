@@ -44,7 +44,7 @@
 		}
 	}
 	
-	 public abstract class GenericStickySingletonClass<T> : MonoBehaviour where T : Component
+	public abstract class GenericPersistentSingletonClass<T> : MonoBehaviour where T : Component
 	{
 		private static T _instance;
 		public static T instance 
