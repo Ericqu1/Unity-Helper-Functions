@@ -1,4 +1,4 @@
-﻿namespace Utilities
+﻿namespace Utilities.Transform
 {
 	using UnityEngine;
 	using System.Collections.Generic;

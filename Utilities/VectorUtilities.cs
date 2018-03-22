@@ -1,4 +1,4 @@
-﻿namespace Utilities
+﻿namespace Utilities.Vector
 {
 	using UnityEngine;
 

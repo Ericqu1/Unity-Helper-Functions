@@ -1,4 +1,4 @@
-﻿namespace Utilities
+﻿namespace Utilities.StandardShader
 {
 	using UnityEngine;
 
