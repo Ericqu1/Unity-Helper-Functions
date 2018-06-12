@@ -1,4 +1,4 @@
-﻿namespace Utilities
+﻿namespace Utilities.Transform
 {
 	using UnityEngine;
 	using System.Collections.Generic;
@@ -43,6 +43,20 @@
 				}
 			}
 			return taggedGameObjects;
+		}
+	}
+
+	public struct SavedTransform
+	{
+		public Vector3 position;
+		public Quaternion rotation;
+		public Vector3 localScale;
+
+		public SavedTransform(Vector3 positionInput, Quaternion rotationInput, Vector3 localScaleInput)
+		{
+			position = positionInput;
+			rotation = rotationInput;
+			localScale = localScaleInput;
 		}
 	}
 }
