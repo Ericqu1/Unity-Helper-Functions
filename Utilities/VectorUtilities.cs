@@ -22,17 +22,17 @@
 				Mathf.SmoothStep(a.z, b.z, t));
 		}
 
-        /// <summary>
-        /// Compares two floating point Vector3s and returns true if they are similar
-        /// </summary>
-        public static bool Approximately(this Vector3 a, Vector3 b)
-        {
-            if (Mathf.Approximately(a.x, b.x) &&
-                Mathf.Approximately(a.y, b.y) &&
-                Mathf.Approximately(a.z, b.z))
-                return true;
-            else
-                return false;
-        }
+		/// <summary>
+		/// Compares two floating point Vector3s and returns true if they are similar
+		/// </summary>
+		public static bool Approximately(this Vector3 a, Vector3 b)
+		{
+		    if (Mathf.Approximately(a.x, b.x) &&
+			Mathf.Approximately(a.y, b.y) &&
+			Mathf.Approximately(a.z, b.z))
+			return true;
+		    else
+			return false;
+		}
 	}
 }
