@@ -1,4 +1,4 @@
-﻿namespace UnityEngine.Events.Extensions
+﻿namespace UnityEngine.Events
 {
     // Useful for serializing a UnityEvent that passes an int argument
     [System.Serializable]
